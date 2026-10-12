@@ -54,19 +54,6 @@ File data yang digunakan:
 4. Install library yang dibutuhkan.
 5. Jalankan aplikasi Streamlit.
 
-Jalankan perintah berikut di terminal:
-
-```bash
-git clone URL_REPOSITORY
-cd NAMA_FOLDER
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-streamlit run dashboard_streamlit.py
-```
-
-Ganti `URL_REPOSITORY` dengan URL repository GitHub dan `NAMA_FOLDER` dengan nama folder project yang sesuai.
-
 Setelah aplikasi berjalan, buka alamat lokal yang ditampilkan di terminal untuk melihat dashboard melalui browser.
 
 ## Kesimpulan
