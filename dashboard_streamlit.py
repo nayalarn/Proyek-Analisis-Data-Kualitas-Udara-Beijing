@@ -254,7 +254,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(
 
 # ------------------------------------------------------------------ Q1
 with tab1:
-    st.subheader("Pertanyaan 1: Stasiun mana yang paling tercemar?")
+    st.subheader("Pertanyaan 1: Stasiun mana yang memiliki rata-rata PM2.5 dan persentase hari melampaui ambang tertinggi sehingga perlu diprioritaskan?")
     tb = (
         df.groupby("station")
         .apply(lambda d: pd.Series({"Rata-rata PM2.5": d["PM2.5"].mean(), "% hari > 75": persen_lewat(d)}), include_groups=False)
@@ -302,9 +302,8 @@ with tab1:
         st.dataframe(tb.sort_values("% hari > 75", ascending=False).round(2))
 
 # ------------------------------------------------------------------ Q2
-# ------------------------------------------------------------------ Q2
 with tab2:
-    st.subheader("Pertanyaan 2: Bagaimana tren dan pola musiman PM2.5?")
+    st.subheader("Pertanyaan 2: Bagaimana tren rata-rata PM2.5 per periode 12 bulan dan perbedaan antara musim dingin dan musim panas?")
     bulanan = df.assign(bln=df["date"].dt.to_period("M").dt.to_timestamp()).groupby("bln")["PM2.5"].mean()
     klim = df.groupby("month")["PM2.5"].mean().reindex(range(1, 13))
 
@@ -366,7 +365,7 @@ with tab2:
 
 # ------------------------------------------------------------------ Q3
 with tab3:
-    st.subheader("Pertanyaan 3: Seberapa besar pengaruh angin dan cuaca terhadap PM2.5?")
+    st.subheader("Pertanyaan 3: Seberapa kuat hubungan kecepatan angin dan faktor cuaca lainnya dengan PM2.5, dan pada kecepatan angin berapa persentase hari yang melampaui ambang menurun secara berarti?")
     faktor = {"WSPM": "Kecepatan angin", "TEMP": "Suhu", "PRES": "Tekanan", "DEWP": "Titik embun", "RAIN": "Curah hujan"}
     kor = df[["PM2.5"] + list(faktor)].corr(method="spearman")["PM2.5"].drop("PM2.5").sort_values()
 
